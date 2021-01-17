@@ -1,9 +1,10 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h4>{{ user.value.UserData.nickname }}</h4>
-        <button class="btn btn-info">Edit</button>
+        <button class="btn btn-info"
+            (click)="editUser(user.key)">Edit</button>
         <button class="btn btn-danger"
-            (click)="removeUser(user.key)">X</button>
+            (click)="removeUser(user)">X</button>
     </div>
     <div class="panel-body">
         <p>{{ user.value.UserData.email }}</p>

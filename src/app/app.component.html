@@ -1,13 +1,15 @@
 <div class="container" style="margin-top: 30px;">
   <app-form
-    (userAdded)="userAdded($event)"></app-form>
+    (userAdded)="userAdded($event)"
+    (userEdited)="editUser($event)"></app-form>
   <hr>
   <div class="row">
     <div class="col-xs-12">
       <app-users
         *ngFor="let user of users | keyvalue"
         [user]="user"
-        (userDeleted)="userDeleted($event)"></app-users>
+        (userDeleted)="userDeleted($event)"
+        (editedUser)="getEditedUser($event)"></app-users>
     </div>
   </div>
 </div>
