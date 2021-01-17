@@ -1,0 +1,63 @@
+<form name="form" [formGroup]='form'>
+    <span
+        [ngClass]="{
+            'success': getEmail().status == 'VALID', 
+            'fail': getEmail().errors && getEmail().touched
+        }"><span class="asterisk">* </span>E-mail : </span>
+    
+    <input type="email" name="email" class="form-control"
+        formControlName='email'><br>
+        
+    <span
+        [ngClass]="{
+            'success': getPassword().status == 'VALID', 
+            'fail': getPassword().errors && getPassword().touched
+        }"><span class="asterisk">* </span>Password :</span>
+
+    <input type="password" name="password" class="form-control"
+        formControlName='password'><br>
+    
+    <span
+        [ngClass]="{
+            'success': getPasswordConf().status == 'VALID' , 
+            'fail': getPasswordConf().errors && getPasswordConf().touched || getPassword().value !== getPasswordConf().value
+        }"><span class="asterisk">* </span>Confirm Password : </span>
+
+    <input type="password" name="confpassword" class="form-control"
+        formControlName='passwordConfirm'><br>
+
+    <span
+        [ngClass]="{
+            'success': getNickname().status == 'VALID', 
+            'fail': getNickname().errors && getNickname().touched
+        }"><span class="asterisk">* </span>Nickname : </span>
+
+    <input type="text" name="nickname" class="form-control"
+        formControlName='nickname'><br>
+        
+    <span
+        [ngClass]="{
+            'success': getPhone().status == 'VALID', 
+            'fail': getPhone().errors && getPhone().touched
+        }"><span class="asterisk">* </span>Phone Number : </span>
+
+    <input type="text" name="phone" class="form-control"
+        formControlName='phone'><br>
+    
+    <span
+        [ngClass]="{
+            'success': getUrl().status == 'VALID', 
+            'fail': getUrl().errors && getUrl().touched
+        }"><span class="asterisk">* </span>Website : </span>
+
+    <input type="url" name="website" class="form-control"
+        formControlName='url'><br>
+    
+    <input type="checkbox" name="agreement" class="form-check-input"
+        formControlName='agreement'>
+        <span> I have read the <span class="agreement">agreement</span></span><br>
+
+    <button type="submit" class="btn btn-primary"
+        [disabled]="!regBtn()"
+        (click)="onSubmit()">Register</button>
+</form>

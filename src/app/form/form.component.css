@@ -1,0 +1,13 @@
+.asterisk {
+    color: red;
+}
+.agreement {
+    color: blue;
+}
+.success {
+    color: black;
+}
+.fail {
+    color: red;
+    font-weight: bold;
+}
