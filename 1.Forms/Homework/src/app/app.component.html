@@ -4,12 +4,10 @@
     (userEdited)="editUser($event)"></app-form>
   <hr>
   <div class="row">
-    <div class="col-xs-12">
       <app-users
         *ngFor="let user of users | keyvalue"
         [user]="user"
         (userDeleted)="userDeleted($event)"
         (editedUser)="getEditedUser($event)"></app-users>
-    </div>
   </div>
 </div>

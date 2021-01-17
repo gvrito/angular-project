@@ -28,11 +28,11 @@ export class FormComponent implements OnInit {
       ]),
       password: new FormControl('',[ 
         Validators.minLength(7),
-        Validators.pattern(/^[a-zA-Z0-9,-]+$/)
+        Validators.pattern(/^[a-zA-Z0-9]+$/)
       ]),
       passwordConfirm: new FormControl('',[ 
         Validators.minLength(7),
-        Validators.pattern(/^[a-zA-Z0-9,-]+$/)
+        Validators.pattern(/^[a-zA-Z0-9]+$/)
       ]),
       nickname: new FormControl('',[
         Validators.required,

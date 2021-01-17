@@ -1,4 +1,4 @@
-<div class="panel panel-primary">
+<!-- <div class="panel panel-primary">
     <div class="panel-heading">
         <h4>{{ user.value.UserData.nickname }}</h4>
         <button class="btn btn-info"
@@ -7,8 +7,26 @@
             (click)="removeUser(user)">X</button>
     </div>
     <div class="panel-body">
-        <p>{{ user.value.UserData.email }}</p>
-        <p>{{ user.value.UserData.phone }}</p>
-        <p>{{ user.value.UserData.website }}</p>
+        <p><span>Email : </span>{{ user.value.UserData.email }}</p>
+        <p><span>Phone : </span>{{ user.value.UserData.phone }}</p>
+        <p><span>Website : </span><a [href]="user.value.UserData.website" target="_blank">{{ user.value.UserData.website }}</a></p>
+    </div>
+</div> -->
+<div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+        <img src="https://www.seekpng.com/png/detail/514-5147412_default-avatar-icon.png" alt="">
+        <hr>
+        <div class="caption">
+            <h3>{{ user.value.UserData.nickname }}</h3>
+            <p><span>Email : </span>{{ user.value.UserData.email }}</p>
+            <p><span>Phone : </span>{{ user.value.UserData.phone }}</p>
+            <p><span>Website : </span><a [href]="user.value.UserData.website" target="_blank">{{ user.value.UserData.website }}</a></p>
+            <p>
+                <button class="btn btn-info"
+                    (click)="editUser(user.key)">Edit</button>
+                <button class="btn btn-danger"
+                    (click)="removeUser(user)">X</button>
+            </p>
+        </div>
     </div>
 </div>
