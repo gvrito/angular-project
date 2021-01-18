@@ -100,6 +100,8 @@ export class FormComponent implements OnInit {
         this.editmode = false;
         this.form.reset();
         this.submitBtnText = 'Register';
+        this.getAgr().setValue('');
+        this.getAgr().enable();
       } else {
         this.userAdded.emit({
           email: this.form.value.email,
