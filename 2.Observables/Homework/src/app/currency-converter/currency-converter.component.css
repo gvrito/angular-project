@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: row;
+}
+.container-left {
+    width: 50%;
+}
+.container-right {
+    width: 50%;
+}
+.switch-button {
+    padding-top: 10px;
+    color: blueviolet;
+}
