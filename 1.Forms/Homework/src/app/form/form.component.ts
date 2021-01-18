@@ -115,6 +115,8 @@ export class FormComponent implements OnInit {
   editForm(object){
     this.submitBtnText = 'Finish Editing';
     this.editmode = true;
+    this.getAgr().setValue('true');
+    this.getAgr().disable();
     this.getEmail().setValue(object.UserData.email);
     this.getPassword().setValue(object.UserData.password);
     this.getNickname().setValue(object.UserData.nickname);
