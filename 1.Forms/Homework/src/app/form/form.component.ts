@@ -109,7 +109,6 @@ export class FormComponent implements OnInit {
           website: this.form.value.url
         })
         this.form.reset();
-        console.log(this.getAgr());
       }
     }
   }
