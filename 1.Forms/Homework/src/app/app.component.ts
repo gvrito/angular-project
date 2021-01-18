@@ -14,13 +14,20 @@ export class AppComponent {
   editableUser;
   @ViewChild(FormComponent) child:FormComponent;
   userAdded(userData: {email: string,password: string,nickname: string,phone: string,website: string}){
-    this.users.set(this.users.size,{
-      'ID': this.users.size,
+    let date = new Date();
+    let id = ''+date.getFullYear()+date.getMonth()+date.getDay()+date.getHours()+date.getMinutes()+date.getSeconds()+date.getMilliseconds()+this.users.size;
+    this.users.set(id,{
+      'ID': id,
       'UserData': userData
     });
   }
   userDeleted(key){
     this.users.delete(key);
+    if(this.child.editmode) {
+      this.child.editmode = false;
+      this.child.form.reset();
+      this.child.submitBtnText = 'Register';
+    }
   }
 
   getEditedUser(key){

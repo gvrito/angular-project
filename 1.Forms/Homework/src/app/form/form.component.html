@@ -7,7 +7,12 @@
     
     <input type="email" name="email" class="form-control"
         formControlName='email'><br>
-        
+
+    <div class="alert alert-danger"
+        *ngIf="getEmail().errors && getEmail().touched">
+        <p>E-mail is required and should have a correct format</p>
+    </div>
+
     <span
         [ngClass]="{
             'success': getPassword().status == 'VALID', 
@@ -16,6 +21,15 @@
 
     <input type="password" name="password" class="form-control"
         formControlName='password'><br>
+
+    <div class="alert alert-danger"
+        *ngIf="getPassword().errors && getPassword().touched">
+        <p>Password is <b>required</b> and it should have this format:</p>
+        <ul>
+            <li><b>Minimum Length</b>: 7 characters</li>
+            <li><b>Characters allowed</b>: English letters and numbers</li>
+        </ul>
+    </div>
     
     <span
         [ngClass]="{
@@ -26,6 +40,16 @@
     <input type="password" name="confpassword" class="form-control"
         formControlName='passwordConfirm'><br>
 
+    <div class="alert alert-danger"
+        *ngIf="getPasswordConf().errors && getPasswordConf().touched || getPassword().value !== getPasswordConf().value">
+        <p>Password confirmation is <b>required</b> and it should have this format:</p>
+        <ul>
+            <li><b>Minimum Length</b>: 7 characters</li>
+            <li><b>Characters allowed</b>: English letters and numbers</li>
+            <li><b>Value should be the same as Password field</b></li>
+        </ul>
+    </div>
+
     <span
         [ngClass]="{
             'success': getNickname().status == 'VALID', 
@@ -35,6 +59,11 @@
     <input type="text" name="nickname" class="form-control"
         formControlName='nickname'><br>
         
+    <div class="alert alert-danger"
+        *ngIf="getNickname().errors && getNickname().touched">
+        <p>Nickname is <b>required</b> and it should only contain English letters and numbers and character "-"</p>
+    </div>
+
     <span
         [ngClass]="{
             'success': getPhone().status == 'VALID', 
@@ -44,6 +73,11 @@
     <input type="text" name="phone" class="form-control"
         formControlName='phone'><br>
     
+    <div class="alert alert-danger"
+        *ngIf="getPhone().errors && getPhone().touched">
+        <p>Phone number is <b>required</b>, should start with "+380" and should have 9 numbers after country code</p>
+    </div>
+
     <span
         [ngClass]="{
             'success': getUrl().status == 'VALID', 
@@ -52,10 +86,20 @@
 
     <input type="url" name="website" class="form-control"
         formControlName='url'><br>
+
+    <div class="alert alert-danger"
+        *ngIf="getUrl().errors && getUrl().touched">
+        <p>Website is <b>required</b> and should have a proper URL format</p>
+    </div>
     
     <input type="checkbox" name="agreement" class="form-check-input"
         formControlName='agreement'>
         <span> I have read the <span class="agreement">agreement</span></span><br>
+
+    <div class="alert alert-danger"
+        *ngIf="getAgr().value =='' || getAgr().value == 'false'">
+        <p>You should agree to the <span class="agreement">Agreement</span></p>
+    </div>
 
     <button type="submit" class="btn btn-primary"
         [disabled]="!regBtn()"

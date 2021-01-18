@@ -46,8 +46,7 @@ export class FormComponent implements OnInit {
         Validators.required,
         Validators.pattern(/(https?:\/\/)?[\w\-~]+(\.[\w\-~]+)+(\/[\w\-~]*)*(#[\w\-]*)?(\?.*)?/)
       ]),
-      agreement: new FormControl('',
-        Validators.required)
+      agreement: new FormControl('',Validators.required)
     }, this.passwordMatchValidator);
   }
   getEmail() {
@@ -110,16 +109,17 @@ export class FormComponent implements OnInit {
           website: this.form.value.url
         })
         this.form.reset();
+        console.log(this.getAgr());
       }
     }
   }
   editForm(object){
     this.submitBtnText = 'Finish Editing';
+    this.editmode = true;
     this.getEmail().setValue(object.UserData.email);
     this.getPassword().setValue(object.UserData.password);
     this.getNickname().setValue(object.UserData.nickname);
     this.getPhone().setValue(object.UserData.phone);
     this.getUrl().setValue(object.UserData.website);
-    this.editmode = true;
   }
 }
