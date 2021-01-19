@@ -1,16 +1,21 @@
 .form-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1px 1fr;
 }
 .form-left {
     padding-right: 50px;
 }
 .form-right {
-    padding: 19px 40px 0px 40px;
+    padding: 19px 40px 0px 50px;
 }
 .multiple-currencies {
     padding-top: 10px;
 }
 select {
     margin-bottom: 10px;
+}
+.line {
+    height: 50vh;
+    width: 100%;
+    background-color: rgb(220,220,220);
 }
