@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Observable, interval } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class CurrencyConverterComponent implements OnInit {
   form1;
+  @Input() currencyList;
   constructor(public httpClient: HttpClient) { }
   
   getFirstCurrency(){
