@@ -27,34 +27,51 @@ export class MultiCurrencyConverterComponent implements OnInit {
   constructor(public httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    let combos:Map<string,{currency:string, amount: number}> = new Map();
-    let totalAmountArray = [];
+    let combos:Map<string,{currency:string, amount: number,finalAmount?:number}> = new Map();
+    let totalAmount = 0;
     this.currencyForm.get('currencies').valueChanges.pipe(
       map(value=>{
-        totalAmountArray = [0]
-        console.log(value)
+        totalAmount= 0;
+        // console.log(value)
         value.forEach(val=> {
           if(val.amount != '' && val.curr!= '') {
-            combos.set(val.curr+val.amount,{
+            let final = 0;
+            this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${val.curr}&symbols=${this.resultProperties['controls'].curr.value}`)
+            .pipe(
+            map((value) => {
+            // totalAmountArray.push(val.amount*value.rates[this.resultProperties['controls'].curr.value])
+            // totalAmountArray += val.amount*value.rates[this.resultProperties['controls'].curr.value]
+            final = val.amount*value.rates[this.resultProperties['controls'].curr.value];
+            // console.log(final)
+            combos.set(val.curr,{
               currency: val.curr,
-              amount: val.amount
+              amount: val.amount,
+              finalAmount: final
             })
+            console.log(combos)
+            console.log(combos.size)
+            })
+          )
+          .subscribe();
           }
         })
         combos.forEach((val,key)=> {
-          console.log(val.amount)
-          this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${val.currency}&symbols=${this.resultProperties['controls'].curr.value}`)
-          .pipe(
-          map((value) => {
-            totalAmountArray.push(val.amount*value.rates[this.resultProperties['controls'].curr.value])
-            // totalAmountArray += val.amount*value.rates[this.resultProperties['controls'].curr.value]
-          })
-          )
-          .subscribe(value => {
-            console.log(totalAmountArray)
-            let finalValue = totalAmountArray.reduce((acc,val)=>acc+val)
-            this.resultProperties['controls'].amount.setValue(finalValue)
-          });
+          // console.log(val.amount)
+          // this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${val.currency}&symbols=${this.resultProperties['controls'].curr.value}`)
+          // .pipe(
+          // map((value) => {
+          //   totalAmountArray.push(val.amount*value.rates[this.resultProperties['controls'].curr.value])
+          //   // totalAmountArray += val.amount*value.rates[this.resultProperties['controls'].curr.value]
+          // })
+          // )
+          // .subscribe(value => {
+          //   console.log(totalAmountArray)
+          //   let finalValue = totalAmountArray.reduce((acc,val)=>acc+val)
+          //   this.resultProperties['controls'].amount.setValue(finalValue)
+          // });
+          console.log('kleeeee')
+          totalAmount += val.finalAmount;
+          console.log(totalAmount)
         })
       }),
     ).subscribe()
