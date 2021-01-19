@@ -11,81 +11,74 @@ import { map } from 'rxjs/operators';
 })
 export class CurrencyConverterComponent implements OnInit {
   form1;
+  firstChanged:Boolean;
+  secondChanged:Boolean;
   @Input() currencyList;
   constructor(public httpClient: HttpClient) { }
   
-  getFirstCurrency(){
-    return this.form1.get('currency1')
+  getFirstFormGr(){
+    return this.form1.get('topForm');
   }
   
-  getSecondCurrency(){
-    return this.form1.get('currency2')
+  getSecondFormGr(){
+    return this.form1.get('bottomForm');
   }
   
-  getFirstValue(){
-    return this.form1.get('value1')
-  }
-  
-  getSecondValue(){
-    return this.form1.get('value2')
-  
-  }
   ngOnInit(): void {
     this.form1 = new FormGroup({
-      currency1: new FormControl(),
-      value1: new FormControl(),
-      currency2: new FormControl(),
-      value2: new FormControl()
+      topForm: new FormGroup({
+        currency1: new FormControl('USD'),
+        value1: new FormControl('0'),
+      }),
+      bottomForm: new FormGroup({
+        currency2: new FormControl('EUR'),
+        value2: new FormControl('0')
+      })
     })
-    // console.log(this.form1)
-    this.getFirstValue().valueChanges.subscribe(val=>{
-      let from = this.getFirstCurrency().value;
-      let to = this.getSecondCurrency().value;
-      this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${from}&symbols=${to}`)
-      .pipe(
-        map((value:{rates:{}}) => {
-          let rate = value.rates[to];
-          this.getSecondValue().setValue(this.getFirstValue().value*rate)
-        })
-      )
-      .subscribe();
+    console.log(this.getFirstFormGr())
+    this.getFirstFormGr().valueChanges.subscribe(val=> {
+      if(!this.getFirstFormGr().pristine){
+        this.getSecondFormGr().markAsPristine();
+        let from = this.getFirstFormGr().controls.currency1.value;
+        let to = this.getSecondFormGr().controls.currency2.value;
+        this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${from}&symbols=${to}`)
+        .pipe(
+          map((value:{rates:{}}) => {
+            let rate = value.rates[to];
+            this.getSecondFormGr().controls.value2.setValue((this.getFirstFormGr().controls.value1.value*rate).toFixed(2))
+          })
+        )
+        .subscribe();
+      }
     })
-    this.getSecondValue().valueChanges.subscribe(val => {
-      let from = this.getFirstCurrency().value;
-      let to = this.getSecondCurrency().value;
-      this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${to}&symbols=${from}`)
-      .pipe(
-        map((value:{rates:{}}) => {
-          let rate = value.rates[from];
-          this.getFirstValue().setValue(this.getSecondValue().value*rate)
-        })
-      )
-      .subscribe();
+    this.getSecondFormGr().valueChanges.subscribe(val=> {
+      if(!this.getSecondFormGr().pristine){
+        this.getFirstFormGr().markAsPristine();
+        let from = this.getFirstFormGr().controls.currency1.value;
+        let to = this.getSecondFormGr().controls.currency2.value;
+        this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${to}&symbols=${from}`)
+        .pipe(
+          map((value:{rates:{}}) => {
+            let rate = value.rates[from];
+            this.getFirstFormGr().controls.value1.setValue((this.getSecondFormGr().controls.value2.value*rate).toFixed(2))
+          })
+        )
+        .subscribe();
+      }
     })
   }
 
   
 
-  getCurrency() {
-    // this.form1.valueChanges.subscribe(val =>{
-    //   let from = this.getFirstCurrency().value;
-    //   let to = this.getSecondCurrency().value;
-    //   this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${from}&symbols=${to}`)
-    //   .pipe(
-    //     map(value => {
-    //       let rate = value.rates[to];
-    //       this.getSecondValue().setValue(this.getFirstValue().value*rate)
-    //     })
-    //   )
-    //   .subscribe();
-    // })
-    // this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${to}&symbols=${from}`)
-    // .pipe(
-    //   map(value => {
-    //     let rate = value.rates[to];
-    //     this.getFirstValue().setValue(this.getSecondValue().value*rate)
-    //   })
-    // )
-    // .subscribe()
-}
+  switchButton(){
+    let firstCurr = this.getFirstFormGr().controls.currency1.value;
+    let firstValue = this.getFirstFormGr().controls.value1.value;
+    let secondCurr = this.getSecondFormGr().controls.currency2.value;
+    let secondValue = this.getSecondFormGr().controls.value2.value;
+    this.getFirstFormGr().controls.currency1.setValue(secondCurr);
+    this.getSecondFormGr().controls.currency2.setValue(firstCurr);
+    this.getSecondFormGr().controls.value2.setValue(firstValue);
+    this.getFirstFormGr().controls.value1.setValue(secondValue);
+
+  }
 }

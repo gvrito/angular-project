@@ -11,4 +11,5 @@
 .switch-button {
     padding-top: 10px;
     color: blueviolet;
+    cursor: pointer;
 }

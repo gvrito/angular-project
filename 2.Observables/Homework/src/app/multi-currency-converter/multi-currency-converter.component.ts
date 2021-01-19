@@ -10,7 +10,7 @@ import { map, mergeMap, reduce, scan, switchMap, takeUntil, tap } from 'rxjs/ope
   styleUrls: ['./multi-currency-converter.component.css']
 })
 export class MultiCurrencyConverterComponent implements OnInit {
-  @Input() currencyList;
+  @Input() currencyList:Array<string>;
   currencyForm = new FormGroup({
     result: new FormGroup({
       curr: new FormControl('EUR'),
@@ -27,73 +27,53 @@ export class MultiCurrencyConverterComponent implements OnInit {
   constructor(public httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    let combos:Map<string,{currency:string, amount: number,finalAmount?:number}> = new Map();
+    let combos: Map<string, { currency: string, amount: number, finalAmount?: number }> = new Map();
     let totalAmount = 0;
     this.currencyForm.get('currencies').valueChanges.pipe(
-      map(value=>{
-        totalAmount= 0;
-        // console.log(value)
-        value.forEach(val=> {
-          if(val.amount != '' && val.curr!= '') {
-            let final = 0;
-            this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${val.curr}&symbols=${this.resultProperties['controls'].curr.value}`)
-            .pipe(
-            map((value) => {
-            // totalAmountArray.push(val.amount*value.rates[this.resultProperties['controls'].curr.value])
-            // totalAmountArray += val.amount*value.rates[this.resultProperties['controls'].curr.value]
-            final = val.amount*value.rates[this.resultProperties['controls'].curr.value];
-            // console.log(final)
-            combos.set(val.curr,{
-              currency: val.curr,
-              amount: val.amount,
-              finalAmount: final
-            })
-            console.log(combos)
-            console.log(combos.size)
-            })
-          )
-          .subscribe();
+      map(value => {
+        totalAmount = 0;
+        value.forEach(val => {
+          if (val.amount != '' && val.curr != '') {
+            if (val.curr === this.resultProperties['controls'].curr) {
+              totalAmount += val.amount;
+            } else {
+              let final = 0;
+              this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${val.curr}&symbols=${this.resultProperties['controls'].curr.value}`)
+                .pipe(
+                  map((value) => {
+                    final = val.amount * value['rates'][this.resultProperties['controls'].curr.value];
+                    totalAmount += final;
+                    this.resultProperties['controls'].amount.setValue(Math.round(totalAmount*100)/100)
+                  })
+                )
+                .subscribe();
+            }
           }
-        })
-        combos.forEach((val,key)=> {
-          // console.log(val.amount)
-          // this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${val.currency}&symbols=${this.resultProperties['controls'].curr.value}`)
-          // .pipe(
-          // map((value) => {
-          //   totalAmountArray.push(val.amount*value.rates[this.resultProperties['controls'].curr.value])
-          //   // totalAmountArray += val.amount*value.rates[this.resultProperties['controls'].curr.value]
-          // })
-          // )
-          // .subscribe(value => {
-          //   console.log(totalAmountArray)
-          //   let finalValue = totalAmountArray.reduce((acc,val)=>acc+val)
-          //   this.resultProperties['controls'].amount.setValue(finalValue)
-          // });
-          console.log('kleeeee')
-          totalAmount += val.finalAmount;
-          console.log(totalAmount)
         })
       }),
     ).subscribe()
   }
 
-  get resultProperties(){
+  get resultProperties() {
     return this.currencyForm.get('result')
   }
 
-  get currencies(){
+  get currencies() {
     return this.currencyForm.get('currencies') as FormArray;
   }
 
-  getResult(){
+  getResult() {
     return this.currencyForm.get('result');
   }
 
-  addCurrency(){
+  addCurrency() {
     this.currencies.push(new FormGroup({
       curr: new FormControl(''),
       amount: new FormControl('')
     }));
+  }
+  currencyValidator() {
+
   }
 
 }

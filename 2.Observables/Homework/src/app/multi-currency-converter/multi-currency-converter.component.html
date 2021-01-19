@@ -10,12 +10,11 @@
                     [formGroupName]="i">
                     <select name="currency-init"
                         formControlName="curr">
-                        <option selected>Choose Currency</option>
                         <option 
                             *ngFor="let abbr of currencyList"
                             value="{{abbr}}">{{ abbr }}</option>
                     </select><br>
-                    <input type="text" name="currency-input" class="form-control" min="0"
+                    <input type="number" name="currency-input" class="form-control" min="0"
                         formControlName="amount">
                 </div>
             </div>
@@ -24,12 +23,11 @@
                 <label for="multi-result">Result</label><br>
                 <select name="currency-result"
                     formControlName="curr">
-                    <option selected>Choose Currency</option>
                     <option 
                         *ngFor="let abbr of currencyList"
                         value="{{abbr}}">{{ abbr }}</option>
                 </select><br>
-                <input type="text" name="multi-result" class="form-control" min="0"
+                <input type="number" name="multi-result" class="form-control" min="0"
                     formControlName="amount">
             </div>
         </div>
