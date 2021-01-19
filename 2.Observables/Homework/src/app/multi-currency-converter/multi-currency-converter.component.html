@@ -1,32 +1,36 @@
 <div class="container">
     <form name="formBottom" class="multi-form" [formGroup]="currencyForm">
         <div class="form-container">
-            <div class="form-left">
+            <div class="form-left"
+                formArrayName="currencies">
                 <button class="btn btn-primary"
                     (click)="addCurrency()">Add Currency</button>
                 <div class="multiple-currencies"
-                    *ngFor="let currencies of getCurrencies().controls; let i=index"
-                    formArrayName="currencies">
-                    <select name="currency-init">
+                    *ngFor="let currency of currencies.controls; let i=index"
+                    [formGroupName]="i">
+                    <select name="currency-init"
+                        formControlName="curr">
                         <option selected>Choose Currency</option>
                         <option 
                             *ngFor="let abbr of currencyList"
                             value="{{abbr}}">{{ abbr }}</option>
                     </select><br>
-                    <input type="text" name="currency-input" class="form-control"
-                        [formControlName]="i">
+                    <input type="text" name="currency-input" class="form-control" min="0"
+                        formControlName="amount">
                 </div>
             </div>
-            <div class="form-right">
-                <select name="currency-result">
+            <div class="form-right"
+                formGroupName="result">
+                <label for="multi-result">Result</label><br>
+                <select name="currency-result"
+                    formControlName="curr">
                     <option selected>Choose Currency</option>
                     <option 
                         *ngFor="let abbr of currencyList"
                         value="{{abbr}}">{{ abbr }}</option>
                 </select><br>
-                <label for="multi-result">Result</label>
-                <input type="text" name="multi-result" class="form-control"
-                    [formControlName]="'result'">
+                <input type="text" name="multi-result" class="form-control" min="0"
+                    formControlName="amount">
             </div>
         </div>
     </form>

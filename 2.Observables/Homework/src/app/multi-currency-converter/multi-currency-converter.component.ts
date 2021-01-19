@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { FormControl, Validators, FormArray, FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { of, Subject, Subscription } from 'rxjs';
+import { map, mergeMap, reduce, scan, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-multi-currency-converter',
@@ -9,19 +12,59 @@ import { FormControl, Validators, FormArray, FormGroup, FormBuilder } from '@ang
 export class MultiCurrencyConverterComponent implements OnInit {
   @Input() currencyList;
   currencyForm = new FormGroup({
-    result: new FormControl,
+    result: new FormGroup({
+      curr: new FormControl('EUR'),
+      amount: new FormControl('0')
+    }),
     currencies: new FormArray([
-      new FormControl('')
+      new FormGroup({
+        curr: new FormControl(''),
+        amount: new FormControl('')
+      })
     ])
   })
 
-  constructor() { }
+  constructor(public httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    console.log(this.getCurrencies())
+    let combos:Map<string,{currency:string, amount: number}> = new Map();
+    let totalAmountArray = [];
+    this.currencyForm.get('currencies').valueChanges.pipe(
+      map(value=>{
+        totalAmountArray = [0]
+        console.log(value)
+        value.forEach(val=> {
+          if(val.amount != '' && val.curr!= '') {
+            combos.set(val.curr+val.amount,{
+              currency: val.curr,
+              amount: val.amount
+            })
+          }
+        })
+        combos.forEach((val,key)=> {
+          console.log(val.amount)
+          this.httpClient.get(`https://api.exchangeratesapi.io/latest?base=${val.currency}&symbols=${this.resultProperties['controls'].curr.value}`)
+          .pipe(
+          map((value) => {
+            totalAmountArray.push(val.amount*value.rates[this.resultProperties['controls'].curr.value])
+            // totalAmountArray += val.amount*value.rates[this.resultProperties['controls'].curr.value]
+          })
+          )
+          .subscribe(value => {
+            console.log(totalAmountArray)
+            let finalValue = totalAmountArray.reduce((acc,val)=>acc+val)
+            this.resultProperties['controls'].amount.setValue(finalValue)
+          });
+        })
+      }),
+    ).subscribe()
   }
 
-  getCurrencies(){
+  get resultProperties(){
+    return this.currencyForm.get('result')
+  }
+
+  get currencies(){
     return this.currencyForm.get('currencies') as FormArray;
   }
 
@@ -30,10 +73,10 @@ export class MultiCurrencyConverterComponent implements OnInit {
   }
 
   addCurrency(){
-    this.getCurrencies().push(new FormControl(''));
-    console.log(this.getCurrencies())
-    console.log(this.currencyForm)
-    console.log(this.currencyList)
+    this.currencies.push(new FormGroup({
+      curr: new FormControl(''),
+      amount: new FormControl('')
+    }));
   }
 
 }
