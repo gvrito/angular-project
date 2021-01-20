@@ -1,14 +1,18 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { FormComponent } from '../app/form/form.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormComponent } from './form/form.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.css']
 })
-export class AppComponent {
-  title = 'Forms';
+export class RegistrationComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
   users = new Map();
   regForm;
   editableUser;
@@ -40,4 +44,5 @@ export class AppComponent {
       'UserData': object
     });
   }
+
 }

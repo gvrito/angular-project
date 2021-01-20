@@ -1,3 +1,6 @@
+.container {
+    padding-bottom: 20px;
+}
 .form-container {
     display: grid;
     grid-template-columns: 1fr 1px 1fr;
@@ -15,7 +18,7 @@ select {
     margin-bottom: 10px;
 }
 .line {
-    height: 50vh;
+    height: 10vh;
     width: 100%;
     background-color: rgb(220,220,220);
 }

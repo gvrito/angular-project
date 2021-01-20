@@ -1,0 +1,18 @@
+<div class="container">
+    <form [formGroup]="form1">
+        <div formGroupName="topForm">
+            <select name="currencies" formControlName="currency1">
+                <option *ngFor="let abbr of currencyList" value="{{abbr}}">{{ abbr }}</option>
+            </select>
+            <input type="number" class="form-control" min="0" formControlName="value1">
+        </div>
+        <p class="switch-button" (click)="switchButton()">Switch</p>
+        <div formGroupName="bottomForm">
+            <select name="currencies" formControlName="currency2">
+                <option *ngFor="let abbr of currencyList" value="{{abbr}}">{{ abbr }}</option>
+            </select>
+            <br>
+            <input type="number" class="form-control" min="0" formControlName="value2">
+        </div>
+    </form>
+</div>

@@ -2,22 +2,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule  } from '@angular/common/http';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
-import { MultiCurrencyConverterComponent } from './multi-currency-converter/multi-currency-converter.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CurrencyModule } from './currency/currency.module';
+import { RegistrationModule } from './registration/registration.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CurrencyConverterComponent,
-    MultiCurrencyConverterComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CurrencyModule,
+    HttpClientModule,
+    RegistrationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

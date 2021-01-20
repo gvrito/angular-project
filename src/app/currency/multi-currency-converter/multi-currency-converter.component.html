@@ -1,0 +1,24 @@
+<div class="container">
+    <form name="formBottom" class="multi-form" [formGroup]="currencyForm">
+        <div class="form-container">
+            <div class="form-left" formArrayName="currencies">
+                <button class="btn btn-primary" (click)="addCurrency()">Add Currency</button>
+                <div class="multiple-currencies" *ngFor="let currency of currencies.controls; let i=index"
+                    [formGroupName]="i">
+                    <select name="currency-init" formControlName="curr">
+                        <option *ngFor="let abbr of currencyList" value="{{abbr}}">{{ abbr }}</option>
+                    </select><br>
+                    <input type="number" name="currency-input" class="form-control" min="0" formControlName="amount">
+                </div>
+            </div>
+            <hr class="line">
+            <div class="form-right" formGroupName="result">
+                <label for="multi-result">Result</label><br>
+                <select name="currency-result" formControlName="curr">
+                    <option *ngFor="let abbr of currencyList" value="{{abbr}}">{{ abbr }}</option>
+                </select><br>
+                <input type="number" name="multi-result" class="form-control" min="0" formControlName="amount">
+            </div>
+        </div>
+    </form>
+</div>
