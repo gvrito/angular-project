@@ -29,10 +29,22 @@ export class EmployeeRegisterComponent implements OnInit {
       this.editMode = true;
       this.buttonText = 'Finish Editing';
       this.editingEmployeeId = value.id;
-      this.form.get('name').setValue(value.name);
-      this.form.get('salary').setValue(value.salary);
-      this.form.get('age').setValue(value.age);
+      this.getName.setValue(value.name);
+      this.getSalary.setValue(value.salary);
+      this.getAge.setValue(value.age);
     })
+  }
+
+  get getName(){
+    return this.form.get('name');
+  }
+
+  get getSalary(){
+    return this.form.get('salary');
+  }
+
+  get getAge(){
+    return this.form.get('age');
   }
 
   onSubmit(){

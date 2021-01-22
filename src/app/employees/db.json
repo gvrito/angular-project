@@ -1,16 +1,10 @@
 {
   "employees": [
     {
-      "name": "Test Employee",
-      "salary": 1000,
-      "age": 14,
+      "name": "Giorgi Gvritishvili",
+      "salary": 1234567,
+      "age": 19,
       "id": 1
-    },
-    {
-      "name": "testName",
-      "salary": 123,
-      "age": 12,
-      "id": 2
     }
   ]
 }

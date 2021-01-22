@@ -6,16 +6,22 @@
 
         <input type="text" name="name" class="form-control"
           formControlName="name"><br>
+        <div class="alert alert-danger"
+          *ngIf="getName.errors && getName.touched">ეს ველი აუცილებელია</div>
 
         <label for="salary">Salary</label>
 
         <input type="number" name="salary" class="form-control"
           formControlName="salary"><br>
+          <div class="alert alert-danger"
+            *ngIf="getSalary.errors && getSalary.touched">ეს ველი აუცილებელია</div>
 
         <label for="age">Age</label>
 
         <input type="number" name="age" class="form-control"
           formControlName="age"><br>
+          <div class="alert alert-danger"
+            *ngIf="getAge.errors && getAge.touched">ეს ველი აუცილებელია</div>
 
         <button class="btn btn-primary" (click)="onSubmit()">{{ buttonText }}</button>
       </form>
