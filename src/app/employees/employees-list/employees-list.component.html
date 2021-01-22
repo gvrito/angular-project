@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <p>#</p>
+          <p>Name</p>
+          <p>Salary</p>
+          <p>Age</p>
+        </li>
+        <li class="list-group-item"
+          *ngFor="let i of employees">
+            <p>{{ i.id }}</p>
+            <p>{{ i.name }}</p>
+            <p>{{ i.salary }}</p>
+            <p>{{ i.age }}</p>
+            <button class="btn btn-warning btn-edit"
+              (click)="edit(i)">Edit</button>
+            <button class="btn btn-danger btn-remove"
+              (click)="delete(i.id)">X</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

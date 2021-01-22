@@ -1,0 +1,32 @@
+.list-group {
+  width: 75%;
+  margin: auto;
+}
+.list-group-item {
+  display: grid;
+  grid-template-columns: 1fr 5fr 5fr 2fr;
+  padding-left: 10px;
+  padding-right: 40px;
+  padding: 5px 40px 5px 10px;
+  position: relative;
+}
+.list-group-item:first-child {
+  background-color: #337ab7;
+  color: #fff;
+  font-weight: bold;
+  border-color: #2e6da4;
+}
+.list-group-item p {
+  display: inline-block;
+}
+.list-group-item button {
+  top: 15%;
+  position: absolute;
+  font-size: 10px;
+}
+.btn-edit {
+  right: 45px;
+}
+.btn-remove {
+  right: 10px;
+}

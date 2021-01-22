@@ -5,10 +5,11 @@ import { HttpClientModule  } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CurrencyModule } from './currency/currency.module';
 import { RegistrationModule } from './registration/registration.module';
-
+import { EmployeesModule } from './employees/employees.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { RegistrationModule } from './registration/registration.module';
     ReactiveFormsModule,
     CurrencyModule,
     HttpClientModule,
-    RegistrationModule
+    RegistrationModule,
+    EmployeesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

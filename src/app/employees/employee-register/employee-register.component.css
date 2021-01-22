@@ -1,0 +1,13 @@
+form {
+  padding-bottom: 50px;
+}
+.reg {
+  width: 30%;
+  margin: auto;
+  position: relative;
+}
+.btn-primary {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
