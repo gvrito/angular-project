@@ -7,7 +7,11 @@ import { CrudService, Employee } from '../crud.service';
   styleUrls: ['./employees-list.component.css']
 })
 export class EmployeesListComponent implements OnInit {
-  employees:Employee[];
+  employees:Employee[] = [];
+  employeesOnPage:Employee[] = [];
+  pages:number = 1;
+  employeeNumber:number;
+  currentPage = 1;
 
   constructor(private crud:CrudService) { }
 
@@ -21,7 +25,15 @@ export class EmployeesListComponent implements OnInit {
   updateList(){
     this.crud.readAllEmployees().subscribe((data)=> {
       this.employees = data;
+      this.employeeNumber = data.length;
+      this.pages = Math.ceil(this.employeeNumber / 10);
+      if(this.pages > 1){
+      }
     });
+  }
+
+  paginate(totalItems, currentPage){
+
   }
 
   delete(id:number){

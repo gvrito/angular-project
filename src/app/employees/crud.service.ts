@@ -34,6 +34,10 @@ export class CrudService {
     return this.http.delete(environment.url + '/' + id);
   }
 
+  readPage(page:number){
+    return this.http.get<Employee[]>(environment.url + '?_page=' + page +'&_limit=10')
+  }
+
 
   editEmployee(id:number,employee:Employee){
     return this.http.patch(environment.url + '/' + id,employee);
