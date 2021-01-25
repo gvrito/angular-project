@@ -9,6 +9,7 @@
   padding-right: 40px;
   padding: 5px 40px 5px 10px;
   position: relative;
+  cursor: pointer;
 }
 .list-group-item:first-child {
   background-color: #337ab7;
@@ -29,4 +30,19 @@
 }
 .btn-remove {
   right: 10px;
+}
+.pagination {
+  width: 87.5%;
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-return {
+  right: 200px;
+}
+.onPage {
+  transform: scale(1.1);
+  border: 3px solid #2e6da4;
+}
+.btn {
+  outline: none;
 }
