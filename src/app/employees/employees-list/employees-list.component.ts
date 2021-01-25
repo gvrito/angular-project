@@ -34,6 +34,7 @@ export class EmployeesListComponent implements OnInit {
   }
 
   paginate(currentPage:number){
+    this.employees = [];
     this.crud.readPage(currentPage).subscribe((data)=> {
       this.isFocusMode = false;
       this.employees = data;
