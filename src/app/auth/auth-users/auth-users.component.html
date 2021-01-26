@@ -5,7 +5,9 @@
   </div>
   <div class="row">
     <app-form
-      *ngIf="editMode"></app-form>
+      *ngIf="editMode"
+      [defaultValue]="formDefaultValue"
+      (userEdited)="userEdit($event)"></app-form>
   </div>
   <div class="row">
     <app-users

@@ -10,12 +10,16 @@ import { AuthService } from '../auth.service';
 })
 export class AuthUsersComponent implements OnInit {
   editableUser:{ID:number, UserData:object};
-  @ViewChild(FormComponent) child:FormComponent;
+  formDefaultValue;
   editMode = false;
   constructor(
     private auth:AuthService,
     public usersdb:UserRegService
-  ) { }
+  ) {
+    this.usersdb.edited.subscribe(()=> {
+      this.editMode = false;
+    })
+  }
 
   ngOnInit(): void {
 
@@ -28,6 +32,7 @@ export class AuthUsersComponent implements OnInit {
   getEditedUser(id:number){
     this.editableUser = this.usersdb.users.get(id);
     this.editMode = true;
+    this.formDefaultValue = this.editableUser;
   }
 
   userEdit(object:object){

@@ -4,3 +4,8 @@
 .logout {
   margin-bottom: 10px;
 }
+.row:nth-child(2) {
+  width: 60%;
+  margin: auto;
+  margin-bottom: 10px;
+}

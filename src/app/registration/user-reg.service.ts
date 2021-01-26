@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class UserRegService {
   users = new Map()
   loggedUser;
+  edited = new EventEmitter();
 
   constructor() { }
 

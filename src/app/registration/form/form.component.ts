@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserRegService } from '../user-reg.service';
 
 @Component({
   selector: 'app-form',
@@ -11,6 +12,7 @@ export class FormComponent implements OnInit {
   editmode;
   submitBtnText:string = 'Register';
   @Input() user;
+  @Input() defaultValue;
   @Output() userAdded = new EventEmitter<{email: string,password: string,nickname: string,phone: string,website: string}>();
   @Output() userEdited = new EventEmitter<{email: string,password: string,nickname: string,phone: string,website: string}>();
 
@@ -18,7 +20,9 @@ export class FormComponent implements OnInit {
     return group.get('password').value === group.get('passwordConfirm').value ? null : {'mismatch' : true}
   }
 
-  constructor() { }
+  constructor(
+    private userReg: UserRegService
+  ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -48,6 +52,9 @@ export class FormComponent implements OnInit {
       ]),
       agreement: new FormControl('',Validators.required)
     }, this.passwordMatchValidator);
+    if(this.defaultValue){
+      this.editForm(this.defaultValue)
+    }
   }
   getEmail() {
     return this.form.get('email');
@@ -102,6 +109,7 @@ export class FormComponent implements OnInit {
         this.submitBtnText = 'Register';
         this.getAgr().setValue('');
         this.getAgr().enable();
+        this.userReg.edited.emit();
       } else {
         this.userAdded.emit({
           email: this.form.value.email,
