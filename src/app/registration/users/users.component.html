@@ -10,9 +10,11 @@
             <p><span>ID : </span> {{ user.value.ID }}</p>
             <p>
                 <button class="btn btn-info"
-                    (click)="editUser(user.key)">Edit</button>
+                    (click)="editUser(user.key)"
+                    *ngIf="isEditable">Edit</button>
                 <button class="btn btn-danger"
-                    (click)="removeUser(user)">X</button>
+                    (click)="removeUser(user)"
+                    *ngIf="isEditable">X</button>
             </p>
         </div>
     </div>

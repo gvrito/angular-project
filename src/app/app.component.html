@@ -1,10 +1,16 @@
 <ul class="nav nav-tabs">
     <li role="presentation" routerLinkActive="active"><a
-                                routerLink="/registration">Registration</a></li>
+                                routerLink="registration">Registration</a></li>
     <li role="presentation" routerLinkActive="active"><a
-                                routerLink="/converter">Currency Converter</a></li>
+                                routerLink="converter">Currency Converter</a></li>
     <li role="presentation" routerLinkActive="active"><a
-                                routerLink="/employees">Employees</a></li>
+                                routerLink="employees">Employees</a></li>
+    <li role="presentation" routerLinkActive="active"><a
+                                routerLink="auth"
+                                *ngIf="!loggedIn">Authorization</a></li>
+    <li role="presentation" routerLinkActive="active"><a
+                                routerLink="users"
+                                *ngIf="loggedIn">Users</a></li>
 </ul>
 
 

@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CurrencyModule } from './currency/currency.module';
 import { RegistrationModule } from './registration/registration.module';
 import { EmployeesModule } from './employees/employees.module';
+import { AuthModule } from './auth/auth.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { EmployeesModule } from './employees/employees.module';
     CurrencyModule,
     HttpClientModule,
     RegistrationModule,
-    EmployeesModule
+    EmployeesModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

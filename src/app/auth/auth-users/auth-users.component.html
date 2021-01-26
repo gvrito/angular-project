@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <button class="btn btn-primary logout"
+    (click)="logOut()">Log Out</button>
+  </div>
+  <div class="row">
+    <app-form
+      *ngIf="editMode"></app-form>
+  </div>
+  <div class="row">
+    <app-users
+      *ngFor="let user of usersdb.users | keyvalue"
+      [user]=user
+      (userDeleted)="userDeleted($event)"
+      (editedUser)="getEditedUser($event)"
+      [isEditable]="isEditable(user.key)"></app-users>
+  </div>
+</div>

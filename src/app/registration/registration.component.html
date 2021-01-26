@@ -5,9 +5,10 @@
     <hr>
     <div class="row">
         <app-users
-          *ngFor="let user of users | keyvalue"
+          *ngFor="let user of userdb.users | keyvalue"
           [user]="user"
           (userDeleted)="userDeleted($event)"
-          (editedUser)="getEditedUser($event)"></app-users>
+          (editedUser)="getEditedUser($event)"
+          [isEditable]="isEditable"></app-users>
     </div>
 </div>
