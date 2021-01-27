@@ -43,6 +43,7 @@ export class AuthUsersComponent implements OnInit {
   }
 
   userDeleted(id:number){
+    this.logOut();
     this.usersdb.users.delete(id);
   }
 
