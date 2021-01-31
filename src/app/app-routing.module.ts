@@ -8,6 +8,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { UserIsloggedGuard } from './auth/user-islogged.guard';
 import { UserIsNotLoggedGuard } from './auth/user-is-not-logged.guard';
 import { AuthUsersComponent } from './auth/auth-users/auth-users.component';
+import { LoaderComponent } from './loader/loader.component';
 
 const routes: Routes = [
   {

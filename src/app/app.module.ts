@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 
@@ -18,6 +19,7 @@ import { InterceptorService } from './loader/interceptor.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -25,7 +27,7 @@ import { InterceptorService } from './loader/interceptor.service';
     HttpClientModule,
     RegistrationModule,
     EmployeesModule,
-    AuthModule
+    AuthModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}
