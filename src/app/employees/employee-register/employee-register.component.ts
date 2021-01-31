@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { LoaderService } from 'src/app/loader/loader.service';
 import { environment } from 'src/environments/environment';
 import { CrudService, Employee } from '../crud.service';
 
@@ -17,7 +18,11 @@ export class EmployeeRegisterComponent implements OnInit {
   buttonText:string = 'Register';
   private editingEmployeeId:number;
 
-  constructor(private http:HttpClient, private crud:CrudService) { }
+  constructor(
+    private http:HttpClient,
+    private crud:CrudService,
+    public loaderService:LoaderService
+    ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({

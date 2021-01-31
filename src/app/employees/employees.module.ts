@@ -7,6 +7,7 @@ import { EmployeesComponent } from './employees.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
 import { EmployeesListComponent } from './employees-list/employees-list.component';
 import { CrudService } from './crud.service';
+import { LoaderModule } from '../loader/loader.module';
 
 
 
@@ -16,7 +17,8 @@ import { CrudService } from './crud.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    LoaderModule
   ],
   exports: [
     EmployeesComponent,

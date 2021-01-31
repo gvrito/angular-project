@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './form/form.component';
 import { UsersComponent } from './users/users.component';
 import { RegistrationComponent } from './registration.component';
+import { LoaderModule } from '../loader/loader.module';
 
 
 
@@ -13,7 +14,8 @@ import { RegistrationComponent } from './registration.component';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoaderModule
   ],
   exports: [
     RegistrationComponent,

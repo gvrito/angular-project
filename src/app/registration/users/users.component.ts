@@ -10,15 +10,17 @@ export class UsersComponent implements OnInit {
   @Input() isEditable;
   @Output() userDeleted = new EventEmitter();
   @Output() editedUser = new EventEmitter();
+  delPressed = false;
+  confirmation = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   removeUser(user) {
-    if(confirm(`Are you Sure you want to remove this user with email ${user.value.UserData.email}?`)){
-      this.userDeleted.emit(user.key);
-    }
+    this.userDeleted.emit(user.key);
+    this.delPressed = false;
   }
   editUser(key){
     this.editedUser.emit(key);

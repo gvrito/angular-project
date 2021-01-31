@@ -5,6 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { AuthUsersComponent } from './auth-users/auth-users.component';
 import { RegistrationModule } from '../registration/registration.module';
+import { LoaderService } from '../loader/loader.service';
+import { InterceptorService } from '../loader/interceptor.service';
+import { LoaderModule } from '../loader/loader.module';
 
 
 @NgModule({
@@ -13,14 +16,17 @@ import { RegistrationModule } from '../registration/registration.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RegistrationModule
+    RegistrationModule,
+    LoaderModule
   ],
   exports: [
     LoginComponent,
     AuthUsersComponent
   ],
   providers: [
-    AuthService
+    AuthService,
+    LoaderService,
+    InterceptorService
   ]
 })
 export class AuthModule { }

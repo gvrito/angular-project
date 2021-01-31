@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoaderService } from 'src/app/loader/loader.service';
 import { UserRegService } from '../user-reg.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class FormComponent implements OnInit {
   }
 
   constructor(
-    private userReg: UserRegService
+    private userReg: UserRegService,
+    public loaderService: LoaderService
   ) { }
 
   ngOnInit(): void {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { LoaderService } from 'src/app/loader/loader.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth:AuthService,
-    private route:Router
+    private route:Router,
+    public loaderService:LoaderService
     ) { }
 
   ngOnInit(): void {

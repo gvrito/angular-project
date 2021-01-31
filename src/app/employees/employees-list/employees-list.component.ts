@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoaderService } from 'src/app/loader/loader.service';
 import { CrudService, Employee } from '../crud.service';
 
 @Component({
@@ -13,7 +14,10 @@ export class EmployeesListComponent implements OnInit {
   currentPage = 1;
   isFocusMode = false;
 
-  constructor(private crud:CrudService) { }
+  constructor(
+    private crud:CrudService,
+    public loaderService:LoaderService
+    ) { }
 
   ngOnInit(): void {
     this.updateList();
@@ -28,8 +32,6 @@ export class EmployeesListComponent implements OnInit {
     this.crud.readAllEmployees().subscribe((data)=> {
       this.employeeNumber = data.length;
       this.pages = new Array(Math.ceil(this.employeeNumber / 10));
-      if(this.pages.length > 1){
-      }
     });
   }
 

@@ -1,3 +1,4 @@
+<app-loader *ngIf="loaderService.isLoading | async"></app-loader>
 <form name="form" [formGroup]='form'>
     <span
         [ngClass]="{
