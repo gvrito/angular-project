@@ -3,4 +3,6 @@ img {
 }
 .modal {
     display: block;
+    animation: initial;
+    transform: initial;
 }

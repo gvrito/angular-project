@@ -6,6 +6,8 @@ import { FormComponent } from './form/form.component';
 import { UsersComponent } from './users/users.component';
 import { RegistrationComponent } from './registration.component';
 import { LoaderModule } from '../loader/loader.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -13,6 +15,8 @@ import { LoaderModule } from '../loader/loader.module';
   declarations: [FormComponent, UsersComponent, RegistrationComponent],
   imports: [
     CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     LoaderModule
